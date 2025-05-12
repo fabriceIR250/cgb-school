@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+ body{
+    font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+ }
+
 
 @keyframes marquee {
   0% { transform: translateX(0); }
@@ -8,4 +14,30 @@
 
 .animate-marquee {
   animation: marquee 12s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }

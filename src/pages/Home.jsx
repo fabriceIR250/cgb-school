@@ -1,20 +1,83 @@
+import { useState, useEffect } from 'react';
+
 const Home = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    {
+      title: "Welcome to CBG TVET",
+      description: "Empowering youth with technical and vocational skills for Rwanda's digital economy.",
+      image: "https://d1yc6vwxvprgjf.cloudfront.net/rw/gallery_images/x_medium/1434488631/530231?1434488631", // 
+      buttonText: "Learn More"
+    },
+    {
+      title: "Quality Technical Education",
+      description: "Hands-on training for real-world employment opportunities.",
+      image: "https://miro.medium.com/v2/resize:fit:600/1*vOpAEgiOjOxFb3ITnzll-A.jpeg", // 
+      buttonText: "Our Programs"
+    },
+    {
+      title: "Industry-Ready Graduates",
+      description: "Partnering with leading tech companies for job placement.",
+      image: "https://cached.imagescaler.hbpl.co.uk/resize/scaleWidth/1272/cached.offlinehbpl.hbpl.co.uk/news/OMP/graduates_tcm27-69694.jpg", // 
+      buttonText: "See Success Stories"
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Welcome Section */}
-      <section className="mb-12">
-        <div className="bg-blue-700 text-white rounded-lg p-8 md:p-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome to CBG TVET</h1>
-          <p className="text-lg mb-6">
-            Empowering youth with technical and vocational skills for Rwanda's digital economy.
-          </p>
-          <button className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded transition">
-            Learn More
-          </button>
+       {/* Welcome Section Carousel with Background Images */}
+      <section className="mb-12 relative h-96 overflow-hidden rounded-lg shadow-xl">
+        {slides.map((slide, index) => (
+          <div 
+            key={index}
+            className={`absolute inset-0 flex flex-col justify-center p-8 md:p-12 text-white transition-opacity duration-1000 ${currentSlide === index ? 'opacity-100' : 'opacity-0'}`}
+          >
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+              <img 
+                src={slide.image} 
+                alt="" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/50"></div>
+            </div>
+            
+            <div className="relative z-10 max-w-2xl mx-auto text-center">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4 animate-fadeIn">
+                {slide.title}
+              </h1>
+              <p className="text-lg mb-6 animate-fadeIn delay-100">
+                {slide.description}
+              </p>
+              <button className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded transition animate-fadeIn delay-200">
+                {slide.buttonText}
+              </button>
+            </div>
+          </div>
+        ))}
+        
+        {/* Navigation Dots */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition ${currentSlide === index ? 'bg-amber-500' : 'bg-white/50 hover:bg-white/80'}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
-      {/* Vision, Mission & Core Values */}
+
+      {/* Rest of your existing sections remain unchanged */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-blue-800">Vision, Mission & Core Values</h2>
         <div className="grid md:grid-cols-3 gap-6">
