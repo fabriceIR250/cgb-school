@@ -1,0 +1,19 @@
+src/
+├── assets/ (for images, logos)
+├── components/
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── Navbar.jsx
+│   └── ... (other reusable components)
+├── pages/
+│   ├── Home.jsx
+│   ├── About.jsx
+│   ├── Programs.jsx
+│   ├── Incubator.jsx
+│   ├── StudentLife.jsx
+│   ├── Admissions.jsx
+│   ├── NewsEvents.jsx
+│   ├── Partners.jsx
+│   └── Contact.jsx
+├── App.jsx
+└── main.jsx
